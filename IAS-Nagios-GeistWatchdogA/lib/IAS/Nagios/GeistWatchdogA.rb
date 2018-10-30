@@ -293,7 +293,7 @@ def GeistWatchdogA.do_main_processing(
 
 	erb = ERB.new(File.read(erb_file_name))
 
-	return erb.result()
+	return erb.result(binding)
 
 end
 
