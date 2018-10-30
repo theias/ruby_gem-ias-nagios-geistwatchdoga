@@ -1,0 +1,112 @@
+<%
+
+require 'pp'
+
+# Uncomment this to debug the data structure.
+# puts watchdog_15_hosts.pretty_inspect.gsub(/^/, "#")
+
+# exit
+
+
+### Host definitions
+host_names = []
+
+watchdog_15_hosts.each do | host_data |
+
+	host_names.push(host_data['host_name'])
+%>
+
+define host {
+	host_name <%= host_data['host_name'] %>
+	use <%= host_data['nagios_host_use'] %>
+<%
+	if host_data.key?('ip_address')
+		%><%= host_data['generic_nagios_parameters'] %><%
+	end
+	if host_data.key?('generic_nagios_parameters')
+		%><%= IAS::Nagios::GeistWatchdogA::generic_nagios_parameter_output(host_data['generic_nagios_parameters']) %><%
+	end
+%>
+
+}
+	<%
+end
+
+
+
+
+### Service Definitions
+watchdog_15_hosts.each do | host_data |
+
+	if (! host_data['default_checks'].nil?)
+
+		host_data['default_checks'].each_pair do | check_name, check_data |
+			sprintf_values = []
+			check_data['check_command_fields'].each do | check_command_field |
+				sprintf_values.push(check_data[check_command_field])
+		end
+		%>
+	define service {
+		host_name <%= host_data['host_name'] %>
+		use <%= host_data['nagios_service_use'] %>
+		service_description <%= check_name %>
+		check_command	<%= sprintf_values.join('!') %>
+	}
+			<%
+		end
+	end
+
+		# Looping through snmp checks
+		host_data['wanted_sensor_data'].each_pair do | sensor_type , sensor_data |
+	%>
+		# Sensor type: <%= sensor_type %>
+		<%
+			sensor_data.each_pair do | snmp_sensor_index, individual_sensor_data |
+		# %>	# SNMP Index: <%= snmp_sensor_index %>	<%	
+				individual_sensor_data['fields'].each_pair do | field_name , field_data |
+					if (field_data.nil?)
+						next
+					end
+			# %>	# Field name: <%= field_name %>	<%
+					sprintf_values = []
+					
+					field_data['check_command_fields'].each do | check_command_field |
+
+						sprintf_values.push(field_data[check_command_field])
+					end
+
+				if (field_name != 'Avail')
+				%>
+				define servicedependency {
+					dependent_host_name            <%= host_data['host_name'] %>
+					dependent_service_description  <%= field_data['auto_description'] %>
+					host_name	<%= host_data['host_name'] %>
+					service_description	<%= host_data['wanted_sensor_data'][sensor_type][snmp_sensor_index]['fields']['Avail']['auto_description'] %>
+					notification_failure_criteria  u,c
+					execution_failure_criteria     u,c
+				}
+				<%
+					end
+				%>
+				define service {
+					host_name <%= host_data['host_name'] %>
+					use <%= host_data['nagios_service_use'] %>
+					notification_interval	60
+					flap_detection_enabled	0
+					service_description <%= field_data['auto_description'] %>
+					check_command	<%= sprintf_values.join('!') %>
+				}
+
+			<%
+				end
+			%>
+		<%
+			end
+		%>
+	<%
+		# End outer loop for snmp check
+		end
+	%>
+<%
+end
+%>

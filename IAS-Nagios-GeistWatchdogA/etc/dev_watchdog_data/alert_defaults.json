@@ -1,0 +1,82 @@
+{
+	"Serial" : { 
+		"nagios_check" : "no_snmp_alert",
+		"dummy_params" : {
+			"state" : 0,
+			"text" : "\"Dummy Serial\""
+		}
+	},
+	
+	"Name" : {
+		"nagios_check" : "no_snmp_alert",
+		"dummy_params" : {
+			"state" : 0,
+			"text" : "\"Dummy Name\""
+		}
+	},
+	
+	"Avail" : {
+		"nagios_check" : "snmp_avail_alert",
+		"dummy_params" : {
+			"state" : 0,
+			"text" : "1"
+		}
+	},
+	
+	"Temp" : {
+		"nagios_check" : "default_temperature_alert_check",
+		"dummy_params" : {
+			"state" : 0,
+			"text" : "73.6F"
+		}
+	},
+	
+	"Humidity" : {
+		"nagios_check" : "default_humidity_alert_check",
+		"dummy_params" : {
+			"state" : 0,
+			"text" : "69%"
+		}
+	},
+	
+	"Flow" : {
+		"nagios_check" : "no_snmp_alert",
+		"dummy_params" : {
+			"state" : 0,
+			"text" : "40"
+		}
+	},
+	
+	"DewPoint" : {
+		"nagios_check" : "default_dew_point_check",
+		"dummy_params" : {
+			"state" : 0,
+			"text" : "62.6F"
+		}		
+	},
+	
+	"Value" : {
+		"nagios_check" : "no_snmp_alert",
+		"dummy_params" : {
+			"state" : 0,
+			"text" : "5"
+		}
+	},
+	
+	"HTTP" : {
+		"nagios_check" : "check_http",
+		"dummy_params" : {
+			"state" : 0,
+			"text" : "HTTP/1.1 200 OK - 844 bytes in 0.008 second response time"
+		}
+	},
+	
+	"PING" : {
+		"nagios_check" : "check_ping",
+		"dummy_params" : {
+			"state" : 0,
+			"text" : "Packet loss = 0%, RTA = 0.77 ms"
+		}
+	}
+}
+

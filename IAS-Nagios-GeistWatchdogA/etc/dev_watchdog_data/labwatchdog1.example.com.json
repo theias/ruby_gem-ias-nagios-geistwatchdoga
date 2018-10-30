@@ -1,0 +1,46 @@
+{
+	"host_name" : "labwatchdog1.example.com",
+	"notes" : "In laboratory 1",
+	"wanted_sensor_data" : {
+		"internal" : {
+			"1" : {
+				"name" : "Internal sensor 1 for watchdog lab 1",
+				"fields" : {
+					"Temp" : {
+						"high_warning" : 87,
+						"high_critical" : 90
+					},
+					"Humidity" : {
+						"low_critical" : 6,
+						"low_warning" : 8
+					}
+				}
+			}
+		},
+		"airFlowSensor" : {
+			"1" : {
+				"name" : "Airflow sensor for fan",
+				"fields" : {
+					"Temp" : {
+						"high_warning" : 85,
+						"high_critical" : 85
+					},
+					"Humidity" : {
+						"high_warning" : 72,
+						"high_critical" : 78
+					}
+				}
+			},
+			"2" : {
+				"name" : "Airflow sensor for hood"
+			},
+			"3" : {
+				"name" : "Airflow sensor near door"
+			}
+		},
+	
+		"a2dSensor" : {
+			"1" : { "name" : "Floor flood sensor"}
+		}
+	}
+}

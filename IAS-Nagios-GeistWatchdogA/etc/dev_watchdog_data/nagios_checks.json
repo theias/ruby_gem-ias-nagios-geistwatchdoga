@@ -1,0 +1,182 @@
+{
+	"check_dummy" : {
+		
+		"nagios_check_command_name" : "IAS_nagios_dev_check_dummy",
+		"check_command_fields" : [
+			"nagios_check_command_name",
+			"state",
+			"text"
+		]
+	},
+	
+	"no_snmp_alert" : {
+		"warning" : "*",
+		"critical" : "*",
+		"nagios_check_command_name" : "check_snmp",
+		"snmp_version" : "1",
+
+		"check_command_fields" : [
+			"nagios_check_command_name",
+			"snmp_version",
+			"snmp_community",
+			"oid",
+			"warning",
+			"critical"
+		]
+	},
+	
+	"check_http" : {
+		"nagios_check_command_name" : "check_http",
+
+		"warn_time" : 5,
+		"critical_time" : 10,
+		
+		"check_command_fields" : [
+			"nagios_check_command_name",
+			"warn_time",
+			"critical_time"
+		]
+	},
+	
+	"check_ping" : {
+		"nagios_check_command_name" : "check_ping",
+		"warning" : "300.0,20%",
+		"critical" : "500.0,60%",
+		"check_command_fields" : [
+			"nagios_check_command_name",
+			"warning",
+			"critical"
+		]
+	},
+		
+
+	"snmp_avail_alert" : {
+
+		"__data_comments": [ "The 'Avail' field for all sensors is 0 if the sensor is unavailable and 1 if the sensor is available.\nHere, I'm just setting the critical range for the Avail to be anything but 1."
+		],
+
+		"nagios_check_command_name" : "check_snmp_wrapper",
+
+		"low_critical" : "0",
+		"low_warning" : "0",
+		"high_warning" : "2",
+		"high_critical" : "2",
+
+		"mode" : "1",
+
+		"check_command_fields" : [
+			"nagios_check_command_name",
+			"snmp_community",
+			"oid",
+			"low_warning",
+			"low_critical",
+			"high_warning",
+			"high_critical",
+			"mode"
+		]
+	},
+
+	"default_humidity_alert_check" : {
+		"nagios_check_command_name" : "check_snmp_wrapper2",
+
+		"low_critical" : "10",
+		"low_warning" : "12",
+		"high_warning" : "70",
+		"high_critical" : "75",
+
+		"units" : "P",
+		"mode" : "1",
+
+		"convert" : "0",
+
+		"check_command_fields" : [
+			"nagios_check_command_name",
+	
+			"snmp_community",
+			"oid",
+			"low_critical",
+			"low_warning",
+			"high_warning",
+			"high_critical",
+			"mode",
+			"units",
+			"convert"
+		]
+	},
+
+
+	"snmp_flood_alert" : {
+		"__data_comments" : [
+			"Normally the voltage measured is between 4.5 and 5 volts. I used tap water for testing.\nThe measured value went down to 0. When dry, this sensor (for ~1 month) did not measure anything below 4.5"
+		],
+		"nagios_check_command_name" : "check_snmp_wrapper",
+
+		"low_critical" : "2",
+		"low_warning" : "3",
+		"high_warning" : "6",
+		"high_critical" : "7",
+
+		"mode" : "1",
+		"check_command_fields" : [
+			"nagios_check_command_name",
+			"snmp_community",
+			"oid",
+			"low_critical",
+			"low_warning",
+			"high_warning",
+			"high_critical",
+
+			"mode"
+		]
+	},
+
+	"default_temperature_alert_check" : {
+
+		"nagios_check_command_name" : "check_snmp_wrapper_scaled",
+
+		"low_critical" : "50",
+		"low_warning" : "55",
+		"high_warning" : "76",
+		"high_critical" : "80",
+
+		"units" : "F",
+		"scale" : "scale=1,(%s/10)",
+
+		"check_command_fields" : [
+			"nagios_check_command_name",
+			"snmp_community",
+			"oid",
+			"low_critical",
+			"low_warning",
+			"high_warning",
+			"high_critical",
+			"units",
+			"scale"
+		]
+	},
+
+	"default_dew_point_check" : {
+
+		"nagios_check_command_name" : "check_snmp_wrapper_scaled",
+
+		"low_warning" : "0",
+		"low_critical" : "0",
+		"high_warning" : "200",
+		"high_critical" : "200",
+
+		"units" : "F",
+		"scale" : "scale=1,(%s/10)",
+
+		"check_command_fields" : [
+			"nagios_check_command_name",
+			"snmp_community",
+			"oid",
+			"low_critical",
+			"low_warning",
+			"high_warning",
+			"high_critical",
+			"units",
+			"scale"
+		]
+	}
+}

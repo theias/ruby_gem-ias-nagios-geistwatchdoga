@@ -1,0 +1,59 @@
+%define rbname IAS-Nagios-GeistWatchdogA
+%define version 0.1.0
+%define release 1
+
+%define gem_to_install %{buildroot}/../../%{rbname}-%{version}.gem
+
+%define gemdir /usr/share/gems
+%define gem_instdir %{gemdir}
+
+Summary:        Write a short summary, because Rubygems requires one.
+Name:           rubygem-%{rbname}
+Version:        %{version}
+Release:        %{release}
+Group:          Development/Languages
+License:        BSD
+URL:            https://www.net.ias.edu
+BuildArch: noarch
+
+
+Requires: ruby 
+Requires: rubygems >= 2.0.14
+Requires: rubygem-bundler
+Requires: rubygem-deep_merge
+BuildRequires: ruby 
+BuildRequires: rubygems >= 2.0.14
+
+Provides:       rubygem-(%{rbname}) = %{version}-%{release}
+
+%description
+Here is a description.
+
+%package doc
+Summary: Documentation for %{name}
+Group: Documentation
+Requires: %{name} = %{version}-%{release}
+BuildArch: noarch
+
+%description doc
+Documentation for %{name}
+
+%clean
+echo NOOP
+
+%install
+
+echo "Here"
+echo %{buildroot}/%{gemdir}
+
+gem install \
+--install-dir %{buildroot}/%{gemdir} \
+--ignore-dependencies \
+--local \
+--force %gem_to_install
+
+
+%files
+%defattr(-, -, -, -)
+%{gem_instdir}
+

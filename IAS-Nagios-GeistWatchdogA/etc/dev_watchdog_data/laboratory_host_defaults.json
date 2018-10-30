@@ -1,0 +1,17 @@
+{
+	"snmp_community" : "default_snmp_community_string",
+	"nagios_host_use" : "laboratory_environmental_hosts",
+	"nagios_service_use" : "laboratory_environmental_services",
+	"default_check_names" : [
+		"PING",
+		"HTTP"
+	],
+	"generic_nagios_parameters" : {
+		"notes_url" : "https://laboratories.example.com/lab_documentation.thml",
+		"hostgroups" : [
+			"laboratory_hosts",
+			"watchdog_sensors"
+		],
+		"flap_detection_enabled" : 0
+	}
+}
