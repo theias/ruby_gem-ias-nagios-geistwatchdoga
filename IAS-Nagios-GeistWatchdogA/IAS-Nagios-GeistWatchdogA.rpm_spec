@@ -1,5 +1,5 @@
 %define rbname IAS-Nagios-GeistWatchdogA
-%define version 0.1.0
+%define version 0.2.0
 %define release 1
 
 %define gem_to_install %{buildroot}/../../%{rbname}-%{version}.gem
