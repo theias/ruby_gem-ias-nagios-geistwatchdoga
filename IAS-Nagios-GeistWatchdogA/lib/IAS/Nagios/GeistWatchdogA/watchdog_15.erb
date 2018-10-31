@@ -20,9 +20,6 @@ define host {
 	host_name <%= host_data['host_name'] %>
 	use <%= host_data['nagios_host_use'] %>
 <%
-	if host_data.key?('ip_address')
-		%><%= host_data['generic_nagios_parameters'] %><%
-	end
 	if host_data.key?('generic_nagios_parameters')
 		%><%= IAS::Nagios::GeistWatchdogA::generic_nagios_parameter_output(host_data['generic_nagios_parameters']) %><%
 	end
