@@ -9,13 +9,14 @@ require 'pp'
 module IAS
   module Nagios
     module GeistWatchdogA
-def GeistWatchdogA.marshal_copy(copy_me)
+	module_function
+def marshal_copy(copy_me)
         return Marshal.load(Marshal.dump(copy_me))
 end
 
 # This works similar to hash.merge except it creates a 
 # copy of all of the data before assigining it back.
-def GeistWatchdogA.derp_copy(
+def derp_copy(
 	data_b,
 	data_a,
 	path_b = [],
@@ -57,7 +58,7 @@ def GeistWatchdogA.derp_copy(
 	return data_a
 end
 
-def GeistWatchdogA.get_watchdog_sensor_structures(
+def get_watchdog_sensor_structures(
 	nagios_checks,
 	alert_defaults,
 	sensor_data_structure,
@@ -100,7 +101,7 @@ def GeistWatchdogA.get_watchdog_sensor_structures(
 
 end
 
-def GeistWatchdogA.copy_default_sensor_settings(watchdog_15_hosts, watchdog_sensor_structure)
+def copy_default_sensor_settings(watchdog_15_hosts, watchdog_sensor_structure)
 	# '1' => marshal_copy(default_airFlowSensor_settings),
 	
 	watchdog_15_hosts.each do | host_data |
@@ -142,7 +143,7 @@ def GeistWatchdogA.copy_default_sensor_settings(watchdog_15_hosts, watchdog_sens
 	end
 end
 
-def GeistWatchdogA.add_description_to_watchdogs (watchdog_15_hosts)
+def add_description_to_watchdogs (watchdog_15_hosts)
 	# This is where we merge the descriptions with the host definitions.
 	wanted_description_fields = ['name']
 	count=0
@@ -175,7 +176,7 @@ def GeistWatchdogA.add_description_to_watchdogs (watchdog_15_hosts)
 	end
 end
 
-def GeistWatchdogA.set_default_host_configuration(
+def set_default_host_configuration(
 	watchdog_15_hosts,
 	default_host_configuration
 )
@@ -187,7 +188,7 @@ def GeistWatchdogA.set_default_host_configuration(
 
 end
 
-def GeistWatchdogA.set_default_host_checks(
+def set_default_host_checks(
 	watchdog_15_hosts,
 	nagios_checks,
 	alert_defaults,
@@ -221,7 +222,7 @@ def GeistWatchdogA.set_default_host_checks(
 	# exit
 end
 
-def GeistWatchdogA.generic_nagios_parameter_output(data)
+def generic_nagios_parameter_output(data)
 	data_lines = []
 	data.each_pair do | name, data_entry |
 		if (data_entry.is_a?(Array))
@@ -257,7 +258,7 @@ def GeistWatchdogA.generic_nagios_parameter_output(data)
 	return data_lines.join("\n")
 end
 
-def GeistWatchdogA.do_main_processing(
+def do_main_processing(
 	settings,
 	nagios_checks,
 	alert_defaults,
