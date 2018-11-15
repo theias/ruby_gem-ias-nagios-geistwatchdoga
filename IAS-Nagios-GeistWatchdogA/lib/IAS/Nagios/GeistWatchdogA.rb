@@ -239,7 +239,7 @@ def generic_nagios_parameter_output(data)
 					data_entry,
 				)
 			)
-		elsif (data_entry.is_a?(Fixnum))
+		elsif (data_entry.is_a?(1.class))
 			data_lines.push(
 				sprintf("\t%s\t%d",
 					name,

@@ -33,7 +33,6 @@ Here is a description.
 Summary: Documentation for %{name}
 Group: Documentation
 Requires: %{name} = %{version}-%{release}
-BuildArch: noarch
 
 %description doc
 Documentation for %{name}
