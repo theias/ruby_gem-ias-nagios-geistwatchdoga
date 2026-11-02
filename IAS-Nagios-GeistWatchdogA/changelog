@@ -1,3 +1,7 @@
+IAS-Nagios-GeistWatchdogA-0.4.0-0 noarch; urgency=low
+
+ -- Martin VanWinkle  Mon, 02 Nov 2026 13:47:32 -0500
+
 IAS-Nagios-GeistWatchdogA-0.3.0-0 noarch; urgency=low
 
 	* Fixed ip_address "issue"
